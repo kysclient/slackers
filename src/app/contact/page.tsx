@@ -1,6 +1,6 @@
 import MainContainer from '@/components/containers/main-container'
 import { Separator } from '@/components/ui/separator'
-import { Head } from 'next/document'
+import Head from 'next/head'
 import Link from 'next/link'
 
 export default function Contact() {
