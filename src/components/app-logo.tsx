@@ -1,9 +1,13 @@
+'use client'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
 
 const AppLogo = () => {
+  const { theme } = useTheme()
+  const logoSrc = theme === 'dark' ? '/logo_w.png' : '/logo_b.png'
   return (
     <Link href={'/'} className="flex flex-row items-center gap-1">
-      <img src="/app-logo.png" alt="logo" className="w-[70px] sm:w-[120px]" />
+      <img src={logoSrc} alt="logo" className="w-[120px]" />
     </Link>
   )
 }

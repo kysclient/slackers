@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Calendar, Loader2 } from 'lucide-react'
+import Head from 'next/head'
 import { useState, useEffect } from 'react'
 
 export default function FortunePage() {
@@ -71,6 +72,8 @@ export default function FortunePage() {
 
   return (
     <div className="max-w-[800px] mx-auto py-[20px] space-y-4">
+      <Head>SLAKERS | 오늘의 운세</Head>
+
       <h1 className="px-4">오늘의 운세</h1>
       <Separator />
       {!fortune && (

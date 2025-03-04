@@ -10,7 +10,7 @@ const Footer = () => {
           </Link>
         ))}
       </div>
-      <span className="text-muted-foreground text-[12px]">© 2025 Spicy from Kim Yu Shin</span>
+      <span className="text-muted-foreground text-[12px]">© 2025 SLACKERS from Kim Yu Shin</span>
     </footer>
   )
 }
@@ -29,7 +29,7 @@ export const footerLinks = [
   },
   {
     title: '문의하기',
-    href: 'https://open.kakao.com/o/sEErsbte'
+    href: '/contact'
   },
   
 ]

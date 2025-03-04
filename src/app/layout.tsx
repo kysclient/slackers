@@ -4,22 +4,25 @@ import RootContainer from '@/components/containers/root-container'
 import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
-  title: '강남구 지역 모임 - 🔥SPICY🔥 외모커트라인 높아요❤️',
-  description: '지루한 일상 속 매운맛🌶️을 느끼고 싶다면',
+  title: 'SLACKERS | 일상이 지루한 직장인들을 위한 놀이터',
+  description: '하루에 만번, 오늘의 단어들을 맞혀보세요. 단어를 입력하면 정답 단어와의 유사도를 보여줍니다. Semantle is an engaging word-guessing game that challenges you to find the hidden word through semantic clues. Sharpen your linguistic skills!',
   icons: {
     icon: '/favicon.png'
   },
   openGraph: {
+    type: 'website',
+    title: 'SLAKERS | 일상이 지루한 직장인들을 위한 놀이터',
+    description: '',
     images: [
       {
-        url: '/og-image.jpeg', // OG 이미지 경로
+        url: '/og-image.png', // OG 이미지 경로
         width: 1200,
         height: 630,
         alt: 'OG Image' // OG 이미지 설명
       }
     ]
   },
-  keywords: ['씨멘틀', '소모임', '스파이시', '윈터']
+  keywords: ['슬래커스', '씨멘틀', '단어 게임', '단어 유사도 추측', '유사도 추측 게임', '심심할 때', 'MBTI', 'Word game', 'Wordle', 'Word Chase', 'Semantle', 'Secret word']
 }
 
 export default function RootLayout({

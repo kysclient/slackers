@@ -75,17 +75,9 @@ const navLinks = [
     href: '/fortune'
   },
   {
-    title: '술게임',
-    href: '/drinking-game'
-  },
-  
-  {
     title: '메뉴추천',
     href: '/recommend-food'
   },
-  {
-    title: '컨텐츠추천',
-    href: 'https://open.kakao.com/o/sEErsbte'
-  }
+
 ]
 export default Header

@@ -18,7 +18,7 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
   const router = useRouter()
 
   const handleSignIn = () => {
-    window.alert('되겠냐고')
+    window.alert('폼내기용2')
   }
 
   const handleLogin = () => {
@@ -41,7 +41,9 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
         window.alert('2글자는 넘겨주세요...')
         return
       }
-      setOpenQuiz(true)
+      setCookie('username', username)
+      localStorage.setItem('username', username)
+      window.location.href = '/'
     }
   }
 
@@ -58,18 +60,17 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
       <div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2">
-            <Link href={'/'}>
-              <img src="/app-logo.png" className="w-[180px]" />
-            </Link>
+            <AppLogo />
+
             <h1 className="text-xl font-bold">
-              Welcome to <span className="text-primary font-bold">Spicy</span>
+              Welcome to <span className="text-primary font-bold">SLACKERS</span>
             </h1>
             <div className="text-center text-sm">
               아직 회원이 아니신가요?{' '}
               <button
                 type="button"
                 onClick={() => {
-                  window.alert('사실 아직 회원가입 기능같은거 없음 ㅋ')
+                  window.alert('폼내기용입니다 ㅎ')
                 }}
                 className="underline underline-offset-4"
               >
@@ -88,7 +89,7 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
                 }}
                 id="email"
                 type="text"
-                placeholder="알아볼 수 있는 닉네임"
+                placeholder="닉네임 입력"
                 required
               />
             </div>
@@ -99,7 +100,9 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
                     window.alert('2글자는 넘겨주세요...')
                     return
                   }
-                  setOpenQuiz(true)
+                  setCookie('username', username)
+                  localStorage.setItem('username', username)
+                  window.location.href = '/'
                 }}
                 type="button"
                 className="w-full"
