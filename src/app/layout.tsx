@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: 'SLAKERS | 일상이 지루한 직장인들을 위한 놀이터',
-    description: '',
+    description: '하루에 만번, 오늘의 단어들을 맞혀보세요. 단어를 입력하면 정답 단어와의 유사도를 보여줍니다. Semantle is an engaging word-guessing game that challenges you to find the hidden word through semantic clues. Sharpen your linguistic skills!',
     images: [
       {
         url: '/og-image.png', // OG 이미지 경로
@@ -22,7 +22,11 @@ export const metadata: Metadata = {
       }
     ]
   },
-  keywords: ['슬래커스', '씨멘틀', '단어 게임', '단어 유사도 추측', '유사도 추측 게임', '심심할 때', 'MBTI', 'Word game', 'Wordle', 'Word Chase', 'Semantle', 'Secret word']
+  keywords: ['슬래커스', '씨멘틀', '단어 게임', '단어 유사도 추측', '유사도 추측 게임', '심심할 때', 'MBTI', 'Word game', 'Wordle', 'Word Chase', 'Semantle', 'Secret word'],
+  metadataBase: new URL('https://slackers.site'),
+  other: {
+    'naver-site-verification': '4bb971f7dbae76b4ac52f755dc358964ab3b01e0'
+  }
 }
 
 export default function RootLayout({
@@ -32,6 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head></head>
       <body suppressHydrationWarning>
         <RootContainer>{children}</RootContainer>
         <Analytics />
