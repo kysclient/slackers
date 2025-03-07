@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Separator } from '../ui/separator'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Input } from '../ui/input'
@@ -18,7 +18,7 @@ const SementleComponent = () => {
   const username = typeof window !== 'undefined' ? localStorage.getItem('username') : ''
   const isOwner = username === 'topten'
   const guessList = typeof window !== 'undefined' ? localStorage.getItem('guessList') : '[]'
-  const [guessData, setGuessData] = useState<any[]>(guessList ? JSON.parse(guessList) : [])
+  const [guessData, setGuessData] = useState<any[]>([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [openAlert, setOpenAlert] = useState(false)
@@ -83,12 +83,15 @@ const SementleComponent = () => {
               return prev
             }
 
-            const place = prev.length > 0 ? prev.length + 1 : 1
-            const updatedGuessData = [{ similarity, guess: word2, rank: data.rank, createdAt: new Date(), place: place }, ...prev.sort((a: any, b: any) => a.similarity - b.similarity)]
+            if (data.similarity !== undefined) {
+              const place = prev.length > 0 ? prev.length + 1 : 1
+              const updatedGuessData = [{ similarity, guess: word2, rank: data.rank, createdAt: new Date(), place: place }, ...prev.sort((a: any, b: any) => a.similarity - b.similarity)]
 
-            localStorage.setItem('guessList', JSON.stringify(updatedGuessData))
+              localStorage.setItem('guessList', JSON.stringify(updatedGuessData))
+              return updatedGuessData
+            }
 
-            return updatedGuessData
+            return prev
           })
 
           setExplanation(data.explanation)
@@ -106,6 +109,14 @@ const SementleComponent = () => {
     setLoading(false)
     setWord2('')
   }
+
+  useEffect(() => {
+    const storedGuessList = localStorage.getItem('guessList')
+    if (storedGuessList) {
+      setGuessData(JSON.parse(storedGuessList))
+    }
+  }, [])
+
   return (
     <div className="space-y-6 flex flex-col w-full px-4 pt-[20px]">
       <div className="">
@@ -246,11 +257,11 @@ export default SementleComponent
 const faqList = [
   {
     title: '왜 잘쓰이는 단어인데 없다고 나오나요?',
-    description: '매 문제마다 서버가 동작하여 인공지능이 빈도수가 높은 단어를 10000개를 사용합니다. 개인 프로젝트이다보니 모델의 용량이 커질수록 비용감당이 힘듭니다. 더 강력한 사전 구축을 원하신다면 하단 Contact페이지를 통해 Buy me a Coffee!'
+    description: '빈도수가 높은 단어를 50000개를 사용합니다. 개인 프로젝트이다보니 모델의 용량이 커질수록 비용감당이 힘듭니다. 더 강력한 사전 구축을 원하신다면 하단 Contact페이지를 통해 Buy me a Coffee!'
   },
   {
     title: '플레이하는 방법은 무엇인가요?',
-    description: '목표는 비밀 단어를 추측하는 것입니다. 각 추측은 하나의 단어여야 합니다. SLACKERS의 Semantle은 당신의 추측이 비밀 단어와 의미상 얼마나 유사한지 알려줄 것입니다. 다른 단어 게임과 달리 이 게임은 철자법에 관한 것이 아닙니다. 그것은 의미에 관한 것입니다. 우리는 대규모 한글 모델을 바탕으로 Wikipedia의 빈도수가 높은 한글 단어를 추출하여, Kiwi 기술을 활용하여 형태소분석 후 의미있는 정답 리스트 10000가지를 뽑아내며, 인공지능(fasttext 기술)을 사용하여 이 의미를 계산합니다. fasttext에서 각 단어는 다른 단어와의 측정 가능한 의미적 거리를 갖고 있어 관련성 수준을 나타냅니다. 비밀 단어를 1000 단어 이내로 얻으면 근접성 열에서 알려드립니다. 당신은 무제한의 추측을 할 수 있습니다! 행운을 빌어요!'
+    description: '목표는 비밀 단어를 추측하는 것입니다. 각 추측은 하나의 단어여야 합니다. SLACKERS의 Semantle은 당신의 추측이 비밀 단어와 의미상 얼마나 유사한지 알려줄 것입니다. 다른 단어 게임과 달리 이 게임은 철자법에 관한 것이 아닙니다. 그것은 의미에 관한 것입니다. 우리는 대규모 한글 모델을 바탕으로 Wikipedia의 빈도수가 높은 한글 단어를 추출하여, Kiwi 기술을 활용하여 형태소분석 후 의미있는 정답 리스트 50000가지를 뽑아내며, 인공지능(fasttext 기술)을 사용하여 이 의미를 계산합니다. fasttext에서 각 단어는 다른 단어와의 측정 가능한 의미적 거리를 갖고 있어 관련성 수준을 나타냅니다. 비밀 단어를 1000 단어 이내로 얻으면 근접성 열에서 알려드립니다. 당신은 무제한의 추측을 할 수 있습니다! 행운을 빌어요!'
   },
   {
     title: '새로운 단어는 언제 나오나요?',
@@ -258,6 +269,6 @@ const faqList = [
   },
   {
     title: '누가 SLACKERS를 운영하나요?',
-    description: 'SLACKERS는 4년 차 프론트엔드 개발자인 "김유신"이 비슷한 서비를 바탕으로 사용자 경험을 최우선으로 고려하여 설계하였으며, 지속적으로 개선하고 업데이트하고 있습니다. '
+    description: 'SLACKERS는 프론트엔드 개발자인 "김유신"이 비슷한 서비를 바탕으로 사용자 경험을 최우선으로 고려하여 설계하였으며, 지속적으로 개선하고 업데이트하고 있습니다. '
   }
 ]
